@@ -97,9 +97,9 @@ function SingleMovie() {
                     Duration:
                   </Text>{" "}
                   <Badge p="0.5" colorScheme="red">
-                    {`${Math.floor(data.runtime / 60)}hours and ${
+                    {`${Math.floor(data.runtime / 60)} hours and ${
                       data.runtime % 60
-                    }`}
+                    }`}{" "}
                     minutes
                   </Badge>
                 </Text>
