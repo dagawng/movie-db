@@ -2,7 +2,7 @@ import React from "react";
 import { Image, Box, Text, Link, Flex, Icon } from "@chakra-ui/react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import moment from "moment/moment";
-import LoadingImage from "./loadingImage";
+
 import LoadingFigure from "./LoadingFigure";
 const MovieCard = ({
   id,
@@ -17,10 +17,7 @@ const MovieCard = ({
       <Box position="relative">
         <Link href={`/movie/${id}`}>
           {poster_path ? (
-            <Image
-              src={`https://image.tmdb.org/t/p/original/${poster_path}`}
-              fallback={<LoadingImage />}
-            />
+            <Image src={`https://image.tmdb.org/t/p/original/${poster_path}`} />
           ) : (
             <LoadingFigure />
           )}
