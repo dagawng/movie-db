@@ -9,7 +9,7 @@ import {
   Box,
   Badge,
 } from "@chakra-ui/react";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { BsFillCameraVideoFill } from "react-icons/bs";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import useFetch from "../useFetch";

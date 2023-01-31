@@ -17,7 +17,10 @@ const MovieCard = ({
       <Box position="relative">
         <Link href={`/movie/${id}`}>
           {poster_path ? (
-            <Image src={`https://image.tmdb.org/t/p/original/${poster_path}`} />
+            <Image
+              src={`https://image.tmdb.org/t/p/original/${poster_path}`}
+              fallback={<LoadingFigure />}
+            />
           ) : (
             <LoadingFigure />
           )}
