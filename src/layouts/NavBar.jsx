@@ -37,7 +37,7 @@ function NavBar() {
             </Link>
           </Box>
         </Hide>
-        <Box width={{ base: "80%", md: "60%" }} mx="auto">
+        <Box width={{ base: "90%", md: "60%" }} mx="auto">
           <SearchBar />
         </Box>
         <Hide below="md">
