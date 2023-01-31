@@ -14,7 +14,7 @@ import { BsFillCameraVideoFill } from "react-icons/bs";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import useFetch from "../useFetch";
 import LoadingSingleMovie from "./LoadingSingleMovie";
-import CastCard from "./CastCard";
+
 import { useGlobalContext } from "../context";
 import MovieTrailerModal from "./MovieTrailerModal";
 function SingleMovie() {
