@@ -2,8 +2,8 @@ import { Grid, Heading, Flex, Button, ButtonGroup } from "@chakra-ui/react";
 import { useGlobalContext } from "../context";
 import { lazy, Suspense } from "react";
 import LoadingFigure from "../components/LoadingFigure";
-const MovieCard = lazy(() => import("../components/MovieCard"));
-const TVShowCard = lazy(() => import("../components/TVShowCard"));
+import TVShowCard from "../components/TVShowCard";
+import MovieCard from "../components/MovieCard";
 
 function Home() {
   const {

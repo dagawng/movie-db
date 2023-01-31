@@ -2,12 +2,10 @@ import LoadingFigure from "./LoadingFigure";
 import { Image, Box, Text, Link, Flex, Icon } from "@chakra-ui/react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import moment from "moment/moment";
-import LoadingImage from "./loadingImage";
-
+import LoadingImage from "./LoadingImage";
 const TVShowCard = ({
   id,
   poster_path,
-
   title,
   release_date,
   name,
