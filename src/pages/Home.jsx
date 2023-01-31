@@ -1,4 +1,4 @@
-import { Grid, Heading, Flex, Button, ButtonGroup } from "@chakra-ui/react";
+import { Grid, Text, Flex, Button, ButtonGroup } from "@chakra-ui/react";
 import { useGlobalContext } from "../context";
 import { lazy, Suspense } from "react";
 import LoadingFigure from "../components/LoadingFigure";
@@ -17,9 +17,9 @@ function Home() {
   return (
     <>
       <Flex gap="4" alignItems="center">
-        <Heading fontSize="3xl" fontFamily="mono">
+        <Text fontSize="1.5rem" fontFamily="mono">
           Trending
-        </Heading>
+        </Text>
         <ButtonGroup isAttached>
           <Button
             variant={popularMovies ? "solid" : "outline"}
