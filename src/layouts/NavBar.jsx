@@ -20,8 +20,8 @@ function NavBar() {
       <Flex p="3" alignItems="center" gap="2" mx="auto" maxW="1240px">
         <SideBar isOpen={isOpen} onClose={onClose} />
         <Show below="md">
-          <Button onClick={onOpen}>
-            <HamburgerIcon />
+          <Button onClick={onOpen} size="lg">
+            <HamburgerIcon size="lg" />
           </Button>
         </Show>
         <Hide below="md">
@@ -37,7 +37,7 @@ function NavBar() {
             </Link>
           </Box>
         </Hide>
-        <Box width={{ base: "90%", md: "60%" }} mx="auto">
+        <Box width={{ base: "100%", sm: "100%", md: "60%" }} mx="auto">
           <SearchBar />
         </Box>
         <Hide below="md">
