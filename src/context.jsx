@@ -10,24 +10,20 @@ export const api_endpoint_key = `?api_key=${
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [popularMovies, setPopularMovies] = useState(true);
-  const [popularTvShows, setPopularTvShows] = useState(false);
-  const [query, setQuery] = useState("trending/movie/day");
+  const [popularMoviesOrTvShow, setPopularMovieOrTvShow] = useState("movie");
+
+  const [query, setQuery] = useState("trending/all/day");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isLoading, data, error } = useFetch(query);
 
   // fetch movies  when movie button is clicked
   const handleMovies = () => {
-    setPopularMovies(true);
-    setPopularTvShows(false);
-    setQuery("trending/movie/day");
+    setPopularMovieOrTvShow("movie");
   };
 
   // fetch tv show when tvshow button is clicked
   const handleTvShows = () => {
-    setPopularTvShows(true);
-    setPopularMovies(false);
-    setQuery("trending/tv/day");
+    setPopularMovieOrTvShow("tv");
   };
 
   return (
@@ -38,8 +34,7 @@ const AppProvider = ({ children }) => {
         data,
         handleTvShows,
         handleMovies,
-        popularMovies,
-        popularTvShows,
+        popularMoviesOrTvShow,
         isOpen,
         onOpen,
         onClose,

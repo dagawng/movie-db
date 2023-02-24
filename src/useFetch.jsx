@@ -6,7 +6,6 @@ const useFetch = (urlParams) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState({ show: false, msg: "" });
   const [data, setData] = useState(null);
-
   const fetchTrendingMovies = async (url) => {
     setIsLoading(true);
 
@@ -25,7 +24,7 @@ const useFetch = (urlParams) => {
     fetchTrendingMovies(
       `${api_endpoint_for_tmdb}${urlParams}${api_endpoint_key}`
     );
-  }, [urlParams]);
+  }, []);
   return { isLoading, data, error };
 };
 

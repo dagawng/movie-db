@@ -10,7 +10,7 @@ import {
   Badge,
 } from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { BsFillCameraVideoFill } from "react-icons/bs";
+import { BsPlayFill } from "react-icons/bs";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import useFetch from "../useFetch";
 import LoadingSingleMovie from "./LoadingSingleMovie";
@@ -57,7 +57,7 @@ function SingleMovie() {
                 my="1rem"
                 variant="outline"
                 colorScheme="red"
-                leftIcon={<BsFillCameraVideoFill />}
+                rightIcon={<BsPlayFill size="1.5rem" />}
               >
                 Play Trailer
               </Button>
@@ -75,7 +75,9 @@ function SingleMovie() {
                     Released Date:
                   </Text>{" "}
                   <Badge p="0.5" colorScheme="pink">
-                    {data.release_date}
+                    {data.release_date
+                      ? data.release_date
+                      : data.first_air_date}
                   </Badge>
                 </Text>
                 <Text>

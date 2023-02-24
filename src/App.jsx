@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import NavBar from "./layouts/NavBar";
 import { Container } from "@chakra-ui/react";
 import SingleMovie from "./components/SingleMovie";
+import MovieCarousel from "./components/MovieCarousel";
 function App() {
   return (
     <>
@@ -12,6 +13,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/movie/:id" element={<SingleMovie />} />
           <Route path="/tv/:id" element={<SingleMovie />} />
+          <Route path="/movie" element={<MovieCarousel />} />
         </Routes>
       </Container>
     </>

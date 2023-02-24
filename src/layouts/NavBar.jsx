@@ -48,7 +48,7 @@ function NavBar() {
             </Box>
             <Spacer />
             <Box>
-              <Link href="/movies">Movies</Link>
+              <Link href="/movie">Movies</Link>
             </Box>
             <Spacer />
             <Box>
