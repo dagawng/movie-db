@@ -18,7 +18,7 @@ function MovieCarousel() {
     <>
       <Grid
         gridAutoFlow="column"
-        gridAutoColumns="17%"
+        gridAutoColumns={{ base: "25%", md: "17%" }}
         gap="6"
         overflowX="auto"
         overscrollbehaviorinline="contain"

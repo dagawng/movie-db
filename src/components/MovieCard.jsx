@@ -17,7 +17,10 @@ const MovieCard = () => {
   const { data, isLoading } = useFetch("movie/popular");
 
   return (
-    <Grid templateColumns="repeat(5, 1fr)" gap={7}>
+    <Grid
+      templateColumns={{ base: "repeat(2,1fr)", md: "repeat(5, 1fr)" }}
+      gap={7}
+    >
       {isLoading
         ? "loading"
         : data.map((movie) => {
