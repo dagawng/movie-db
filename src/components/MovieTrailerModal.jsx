@@ -1,5 +1,11 @@
 import React from "react";
-import { Modal, ModalOverlay, ModalContent, ModalBody } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  AspectRatio,
+} from "@chakra-ui/react";
 import { useGlobalContext } from "../context";
 function MovieTrailerModal() {
   const { isOpen, onClose } = useGlobalContext();
@@ -9,11 +15,12 @@ function MovieTrailerModal() {
       <ModalContent>
         {/* <ModalHeader></ModalHeader> */}
         <ModalBody>
-          <iframe
-            src="https://www.youtube.com/embed/sb7qxjPEcwg"
-            width={700}
-            height={500}
-          ></iframe>
+          <AspectRatio maxW="780px" ratio={1}>
+            <iframe
+              src="https://www.youtube.com/embed/sb7qxjPEcwg"
+              allowFullScreen
+            ></iframe>
+          </AspectRatio>
         </ModalBody>
       </ModalContent>
     </Modal>

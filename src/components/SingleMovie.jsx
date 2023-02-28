@@ -14,7 +14,7 @@ import { BsPlayFill } from "react-icons/bs";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import useFetch from "../useFetch";
 import LoadingSingleMovie from "./LoadingSingleMovie";
-
+import Casts from "./Casts";
 import { useGlobalContext } from "../context";
 import MovieTrailerModal from "./MovieTrailerModal";
 function SingleMovie() {
@@ -135,11 +135,11 @@ function SingleMovie() {
         </Card>
       )}
       <Box>
-        <Text fontSize="1.5rem" mt="1rem" ml="5">
+        <Text fontSize="1.7rem" m="1rem" ml="5">
           Casts
         </Text>
 
-        {/* <CastCard path={pathname} mb="5" /> */}
+        <Casts id={pathname} />
       </Box>
     </>
   );

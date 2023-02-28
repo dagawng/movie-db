@@ -1,10 +1,7 @@
 import {
   Text,
   Flex,
-  Button,
-  Divider,
   Box,
-  ButtonGroup,
   Tabs,
   TabList,
   TabPanels,
@@ -12,7 +9,6 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 
-import { useGlobalContext } from "../context";
 import MovieCarousel from "../components/MovieCarousel";
 import MovieCard from "../components/MovieCard";
 import TVShowCard from "../components/TVShowCard";
