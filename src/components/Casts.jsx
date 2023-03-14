@@ -1,9 +1,9 @@
 import useFetch from "../useFetch";
 import { Box, Grid, Image, Text, GridItem, Link } from "@chakra-ui/react";
-import SampleImage from "../assets/books.jpg";
+import thumbnail from "../assets/pp.webp";
 function Casts({ id }) {
   const { data, isLoading } = useFetch(`${id}/credits`);
-  console.log(data);
+
   return (
     <Box>
       <Grid
@@ -14,13 +14,14 @@ function Casts({ id }) {
           ? "Loading..."
           : data.cast.map((cast, index) => {
               return (
-                <GridItem>
-                  <Link href="/" key={cast.id + index}>
+                <GridItem key={cast.id}>
+                  <Link href="/">
                     <Image
                       src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
                       borderRadius="full"
+                      title={cast.name}
                       objectFit="cover"
-                      fallbackSrc="https://via.placeholder.com/150"
+                      fallbackSrc={thumbnail}
                     ></Image>
                   </Link>
                   <Box p="5">

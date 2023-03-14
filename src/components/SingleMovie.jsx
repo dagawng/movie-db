@@ -61,7 +61,7 @@ function SingleMovie() {
               >
                 Play Trailer
               </Button>
-              <MovieTrailerModal />
+              <MovieTrailerModal id={data.id} />
               <Text fontWeight="bold" fontFamily="mono" fontSize="xl">
                 Overview
               </Text>
