@@ -15,15 +15,14 @@ function Casts({ id }) {
           : data.cast.map((cast, index) => {
               return (
                 <GridItem key={cast.id}>
-                  <Link href="/">
-                    <Image
-                      src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
-                      borderRadius="full"
-                      title={cast.name}
-                      objectFit="cover"
-                      fallbackSrc={thumbnail}
-                    ></Image>
-                  </Link>
+                  <Image
+                    src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
+                    borderRadius="full"
+                    title={cast.name}
+                    objectFit="cover"
+                    fallbackSrc={thumbnail}
+                  ></Image>
+
                   <Box p="5">
                     <Text fontWeight="bold">{cast.name}</Text>
                     <Text>{cast.character}</Text>

@@ -26,7 +26,7 @@ function MovieCarousel() {
       >
         {isLoading
           ? "loading.."
-          : data.map((media) => {
+          : data.results.map((media) => {
               return (
                 <GridItem key={media.id} scrollSnapAlign="start">
                   <Box position="relative">

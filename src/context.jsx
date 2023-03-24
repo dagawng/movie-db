@@ -10,8 +10,9 @@ export const api_endpoint_key = `?api_key=${
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
+  const [search, setSearch] = useState(" ");
   const [popularMoviesOrTvShow, setPopularMovieOrTvShow] = useState("movie");
-
+  const [page, setPage] = useState(1);
   const [query, setQuery] = useState("trending/all/day");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isLoading, data, error } = useFetch(query);
@@ -26,6 +27,21 @@ const AppProvider = ({ children }) => {
     setPopularMovieOrTvShow("tv");
   };
 
+  const nextPage = () => {
+    if (page > 500) {
+      setPage(1);
+    } else {
+      setPage(page + 1);
+    }
+  };
+  const previousPage = () => {
+    if (page <= 1) {
+      setPage(1);
+    } else {
+      setPage(page - 1);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -38,6 +54,12 @@ const AppProvider = ({ children }) => {
         isOpen,
         onOpen,
         onClose,
+        setSearch,
+        search,
+        page,
+        setPage,
+        nextPage,
+        previousPage,
       }}
     >
       {children}

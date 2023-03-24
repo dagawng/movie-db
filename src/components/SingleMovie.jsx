@@ -8,18 +8,15 @@ import {
   Button,
   Box,
   Badge,
+  Spacer,
 } from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { BsPlayFill } from "react-icons/bs";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import useFetch from "../useFetch";
 import LoadingSingleMovie from "./LoadingSingleMovie";
 import Casts from "./Casts";
-import { useGlobalContext } from "../context";
-import MovieTrailerModal from "./MovieTrailerModal";
 function SingleMovie() {
   const { pathname } = useLocation();
-  const { onOpen } = useGlobalContext();
 
   const { data, isLoading } = useFetch(pathname);
   const navigate = useNavigate();
@@ -52,24 +49,14 @@ function SingleMovie() {
             <CardBody>
               <Heading size="lg">{data.title}</Heading>
 
-              <Button
-                onClick={onOpen}
-                my="1rem"
-                variant="outline"
-                colorScheme="red"
-                rightIcon={<BsPlayFill size="1.5rem" />}
-              >
-                Play Trailer
-              </Button>
-              <MovieTrailerModal id={data.id} />
-              <Text fontWeight="bold" fontFamily="mono" fontSize="xl">
+              <Text mt="5" fontFamily="mono" fontSize="xl" color="purple">
                 Overview
               </Text>
               <Text py="2" letterSpacing={0.5} fontSize="1.25rem">
                 {data.overview}
               </Text>
 
-              <Box>
+              <Box mt="5">
                 <Text>
                   <Text as="span" fontWeight="bold">
                     Released Date:

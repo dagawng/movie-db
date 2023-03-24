@@ -1,20 +1,19 @@
+import useFetch from "../useFetch";
 import {
-  Image,
-  Box,
-  Text,
-  Link,
-  Flex,
-  Icon,
   Grid,
   GridItem,
+  Box,
+  Link,
+  Image,
+  Flex,
+  Text,
+  Icon,
 } from "@chakra-ui/react";
 import { AiFillPlayCircle } from "react-icons/ai";
-import moment from "moment/moment";
-import useFetch from "../useFetch";
-import LoadingImage from "./LoadingImage";
-
-const MovieCard = () => {
-  const { data, isLoading } = useFetch("movie/popular");
+import LoadingImage from "../components/LoadingImage";
+import moment from "moment";
+function TVShows() {
+  const { data, isLoading } = useFetch("discover/tv");
 
   return (
     <Grid
@@ -23,13 +22,13 @@ const MovieCard = () => {
     >
       {isLoading
         ? "loading"
-        : data.results.map((movie) => {
+        : data.results.map((tv) => {
             return (
-              <GridItem key={movie.id}>
+              <GridItem key={tv.id}>
                 <Box position="relative">
-                  <Link href={`/movie/${movie.id}`}>
+                  <Link href={`/tv/${tv.id}`}>
                     <Image
-                      src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                      src={`https://image.tmdb.org/t/p/original/${tv.poster_path}`}
                       fallback={<LoadingImage />}
                     />
 
@@ -53,12 +52,12 @@ const MovieCard = () => {
                   </Link>
                 </Box>
                 <Box p="2">
-                  <Link fontWeight="bold" href={`/movie/${movie.id}`}>
-                    {movie.title}
+                  <Link fontWeight="bold" href={`/tvshow/${tv.id}`}>
+                    {tv.name}
                   </Link>
 
                   <Text color="gray.500">
-                    {moment(movie.release_date, "YYYY-MM-DD").format(
+                    {moment(tv.first_air_date, "YYYY-MM-DD").format(
                       "MMMM Do YYYY"
                     )}
                   </Text>
@@ -68,6 +67,6 @@ const MovieCard = () => {
           })}
     </Grid>
   );
-};
+}
 
-export default MovieCard;
+export default TVShows;
