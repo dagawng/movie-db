@@ -35,7 +35,7 @@ function SideBar({ isOpen, onClose }) {
               <Button
                 as="a"
                 leftIcon={<Icon as={MdMovieFilter} />}
-                href="/movies"
+                href="/movie"
               >
                 Movie
               </Button>
