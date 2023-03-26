@@ -17,10 +17,10 @@ import Pagination from "../components/Pagination";
 import { useGlobalContext } from "../context";
 
 function Movies() {
-  const { page } = useGlobalContext();
+  const { currentPage } = useGlobalContext();
 
-  const { data, isLoading } = useFetch("discover/movie", page);
-  console.log(data);
+  const { data, isLoading } = useFetch("discover/movie", currentPage);
+
   return (
     <Box>
       <Pagination data={data} loading={isLoading} />

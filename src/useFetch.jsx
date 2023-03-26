@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { api_endpoint_for_tmdb, api_endpoint_key } from "./context";
 import axios from "axios";
 
-const useFetch = (urlParams, page = 1) => {
+const useFetch = (urlParams, currentPage = 1) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState({ show: false, msg: "" });
   const [data, setData] = useState(null);
@@ -26,9 +26,9 @@ const useFetch = (urlParams, page = 1) => {
 
   useEffect(() => {
     fetchTrendingMovies(
-      `${api_endpoint_for_tmdb}${urlParams}${api_endpoint_key}&page=${page}`
+      `${api_endpoint_for_tmdb}${urlParams}${api_endpoint_key}&page=${currentPage}`
     );
-  }, [page]);
+  }, [currentPage]);
   return { isLoading, data, error };
 };
 

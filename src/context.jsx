@@ -11,8 +11,12 @@ const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const [search, setSearch] = useState(" ");
+  const pageNumberLimit = 5;
   const [popularMoviesOrTvShow, setPopularMovieOrTvShow] = useState("movie");
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [maxPageLimit, setMaxPageLimit] = useState(5);
+  const [minPageLimit, setMinPageLimit] = useState(0);
+
   const [query, setQuery] = useState("trending/all/day");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isLoading, data, error } = useFetch(query);
@@ -28,18 +32,34 @@ const AppProvider = ({ children }) => {
   };
 
   const nextPage = () => {
-    if (page > 500) {
-      setPage(1);
-    } else {
-      setPage(page + 1);
+    if (currentPage + 1 > maxPageLimit) {
+      setMaxPageLimit(maxPageLimit + pageNumberLimit);
+      setMinPageLimit(minPageLimit + pageNumberLimit);
     }
+    setCurrentPage((oldPage) => {
+      let nextPage = oldPage + 1;
+      if (nextPage > 500) {
+        nextPage = 1;
+      }
+      return nextPage;
+    });
   };
   const previousPage = () => {
-    if (page <= 1) {
-      setPage(1);
-    } else {
-      setPage(page - 1);
+    if ((currentPage - 1) % pageNumberLimit === 0) {
+      setMaxPageLimit(maxPageLimit - pageNumberLimit);
+      setMinPageLimit(minPageLimit - pageNumberLimit);
     }
+    setCurrentPage((oldPage) => {
+      let prevPage = oldPage - 1;
+      if (prevPage < 1) {
+        prevPage = 500;
+      }
+      return prevPage;
+    });
+  };
+
+  const handlePageClick = (index) => {
+    setCurrentPage(index);
   };
 
   return (
@@ -56,10 +76,13 @@ const AppProvider = ({ children }) => {
         onClose,
         setSearch,
         search,
-        page,
-        setPage,
+        currentPage,
+        setCurrentPage,
         nextPage,
         previousPage,
+        handlePageClick,
+        minPageLimit,
+        maxPageLimit,
       }}
     >
       {children}

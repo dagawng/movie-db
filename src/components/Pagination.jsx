@@ -3,32 +3,69 @@ import { ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
 import { useGlobalContext } from "../context";
 
 function Pagination() {
+  const totalPages = 10;
+
   let pages = [];
   for (let i = 1; i <= 500; i++) {
     pages.push(i);
   }
-  const { nextPage, previousPage, page } = useGlobalContext();
+
+  const {
+    nextPage,
+    previousPage,
+    handlePageClick,
+    currentPage,
+    minPageLimit,
+    maxPageLimit,
+  } = useGlobalContext();
+
+  const pageNumbers = pages.map((page) => {
+    if (page <= maxPageLimit && page >= minPageLimit) {
+      return (
+        <Button
+          borderRadius="50%"
+          mx="0.5rem"
+          padding="1"
+          _hover={{ bg: "gray.400" }}
+          key={page}
+          bg={page === currentPage ? "gray.400" : ""}
+          onClick={() => handlePageClick(page)}
+        >
+          {page}
+        </Button>
+      );
+    } else {
+      return null;
+    }
+  });
+
+  let pageIncrementEllipse = null;
+  if (pages.length > maxPageLimit) {
+    pageIncrementEllipse = (
+      <Button onClick={nextPage} bg="white" _hover={{ bg: "white" }}>
+        &hellip;
+      </Button>
+    );
+  }
+  let pageDecrementEllipse = null;
+  if (minPageLimit >= 1) {
+    pageDecrementEllipse = (
+      <Button onClick={previousPage} _hover={{ bg: "white" }} bg="white">
+        &hellip;
+      </Button>
+    );
+  }
+
   return (
-    <Flex my="2rem" justify="center">
+    <Flex justify="center" my="1.75rem">
       <IconButton
         borderRadius="50%"
         icon={<ArrowBackIcon />}
-        mr="0.5rem"
         onClick={previousPage}
       />
-
-      <Button as="a" borderRadius="50%" mr="0.5rem" _active={{ color: "dark" }}>
-        1
-      </Button>
-      <Button borderRadius="50%" mr="0.5rem">
-        2
-      </Button>
-      <Button borderRadius="50%" mr="0.5rem">
-        3
-      </Button>
-      <Button borderRadius="50%" mr="0.5rem">
-        4
-      </Button>
+      {pageDecrementEllipse}
+      {pageNumbers}
+      {pageIncrementEllipse}
       <IconButton
         borderRadius="50%"
         icon={<ArrowForwardIcon />}
