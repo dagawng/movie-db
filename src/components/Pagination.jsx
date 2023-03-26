@@ -58,11 +58,14 @@ function Pagination() {
 
   return (
     <Flex justify="center" my="1.75rem">
-      <IconButton
-        borderRadius="50%"
-        icon={<ArrowBackIcon />}
-        onClick={previousPage}
-      />
+      {currentPage > pages[0] && (
+        <IconButton
+          borderRadius="50%"
+          icon={<ArrowBackIcon />}
+          onClick={previousPage}
+        />
+      )}
+
       {pageDecrementEllipse}
       {pageNumbers}
       {pageIncrementEllipse}
