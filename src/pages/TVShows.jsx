@@ -24,7 +24,7 @@ function TVShows() {
 
   return (
     <Box>
-      <Pagination data={data} loading={isLoading} />
+      <Pagination totalPages={data.total_pages} loading={isLoading} />
       <Grid
         templateColumns={{ base: "repeat(2,1fr)", md: "repeat(5, 1fr)" }}
         gap={7}

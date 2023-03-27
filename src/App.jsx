@@ -5,6 +5,7 @@ import { Container } from "@chakra-ui/react";
 import SingleMovie from "./components/SingleMovie";
 import Movies from "./pages/Movies";
 import TVShows from "./pages/TVShows";
+import Search from "./components/Search";
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
           <Route path="/tv/:id" element={<SingleMovie />} />
           <Route path="/movie" element={<Movies />} />
           <Route path="/tv-show" element={<TVShows />} />
+          <Route path="/search/:id" element={<Search />} />
         </Routes>
       </Container>
     </>
@@ -23,5 +25,3 @@ function App() {
 }
 
 export default App;
-
-// AiOutlinePlayCircle;

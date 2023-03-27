@@ -2,11 +2,9 @@ import { Button, Flex, IconButton } from "@chakra-ui/react";
 import { ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
 import { useGlobalContext } from "../context";
 
-function Pagination() {
-  const totalPages = 10;
-
+function Pagination({ totalPages }) {
   let pages = [];
-  for (let i = 1; i <= 500; i++) {
+  for (let i = 1; i <= totalPages; i++) {
     pages.push(i);
   }
 
@@ -24,7 +22,7 @@ function Pagination() {
       return (
         <Button
           borderRadius="50%"
-          mx="0.5rem"
+          mx="0.1rem"
           padding="1"
           _hover={{ bg: "gray.400" }}
           key={page}

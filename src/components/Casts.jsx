@@ -1,8 +1,10 @@
 import useFetch from "../useFetch";
 import { Box, Grid, Image, Text, GridItem, Link } from "@chakra-ui/react";
 import thumbnail from "../assets/pp.webp";
+import { useGlobalContext } from "../context";
 function Casts({ id }) {
-  const { data, isLoading } = useFetch(`${id}/credits`);
+  const { currentPage } = useGlobalContext();
+  const { data, isLoading } = useFetch(`${id}/credits`, currentPage);
 
   return (
     <Box>

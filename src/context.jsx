@@ -1,6 +1,8 @@
 import { useState, useContext, createContext } from "react";
 import { useDisclosure } from "@chakra-ui/react";
-import useFetch from "./useFetch";
+
+import axios from "axios";
+
 export const api_endpoint_for_tmdb = `https://api.themoviedb.org/3/`;
 
 export const api_endpoint_key = `?api_key=${
@@ -10,16 +12,15 @@ export const api_endpoint_key = `?api_key=${
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [search, setSearch] = useState(" ");
   const pageNumberLimit = 5;
   const [popularMoviesOrTvShow, setPopularMovieOrTvShow] = useState("movie");
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPageLimit, setMaxPageLimit] = useState(5);
   const [minPageLimit, setMinPageLimit] = useState(0);
+  const [queryData, setQueryData] = useState([]);
+  const [searchLoading, setSearchLoading] = useState(true);
 
-  const [query, setQuery] = useState("trending/all/day");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isLoading, data, error } = useFetch(query);
 
   // fetch movies  when movie button is clicked
   const handleMovies = () => {
@@ -62,20 +63,34 @@ const AppProvider = ({ children }) => {
     setCurrentPage(index);
   };
 
+  const handleOnChangeSearch = async (query) => {
+    try {
+      const tv = await axios(
+        `${api_endpoint_for_tmdb}search/tv${api_endpoint_key}&query=${query}`
+      );
+
+      const movie = await axios(
+        `${api_endpoint_for_tmdb}search/movie${api_endpoint_key}&query=${query}`
+      );
+
+      setQueryData([...tv.data.results, ...movie.data.results]);
+
+      setSearchLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
-        isLoading,
-        error,
-        data,
         handleTvShows,
         handleMovies,
         popularMoviesOrTvShow,
         isOpen,
         onOpen,
         onClose,
-        setSearch,
-        search,
+
         currentPage,
         setCurrentPage,
         nextPage,
@@ -83,6 +98,9 @@ const AppProvider = ({ children }) => {
         handlePageClick,
         minPageLimit,
         maxPageLimit,
+        queryData,
+        handleOnChangeSearch,
+        searchLoading,
       }}
     >
       {children}

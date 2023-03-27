@@ -8,28 +8,22 @@ import {
   Button,
   Box,
   Badge,
-  Spacer,
 } from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import useFetch from "../useFetch";
 import LoadingSingleMovie from "./LoadingSingleMovie";
 import Casts from "./Casts";
+import { useGlobalContext } from "../context";
 function SingleMovie() {
+  const { currentPage } = useGlobalContext();
   const { pathname } = useLocation();
 
-  const { data, isLoading } = useFetch(pathname);
+  const { data, isLoading } = useFetch(pathname, currentPage);
   const navigate = useNavigate();
-
-  const goBack = () => {
-    navigate(-1);
-  };
 
   return (
     <>
-      <Button mb={3} leftIcon={<ArrowBackIcon />} onClick={goBack}>
-        Back
-      </Button>
       {isLoading ? (
         <LoadingSingleMovie />
       ) : (

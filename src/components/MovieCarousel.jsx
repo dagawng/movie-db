@@ -11,9 +11,11 @@ import {
 import useFetch from "../useFetch";
 import LoadingImage from "./LoadingImage";
 import { AiFillPlayCircle } from "react-icons/ai";
+import { useGlobalContext } from "../context";
 import moment from "moment";
 function MovieCarousel() {
-  const { data, isLoading } = useFetch("trending/all/day");
+  const { currentPage } = useGlobalContext();
+  const { data, isLoading } = useFetch("trending/all/day", currentPage);
   return (
     <>
       <Grid

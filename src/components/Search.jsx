@@ -1,4 +1,3 @@
-import useFetch from "../useFetch";
 import {
   Grid,
   GridItem,
@@ -14,30 +13,28 @@ import Loader from "../components/Loader";
 import { AiFillPlayCircle } from "react-icons/ai";
 import LoadingImage from "../components/LoadingImage";
 import moment from "moment";
-import Pagination from "../components/Pagination";
 import { useGlobalContext } from "../context";
-
-function Movies() {
-  const { currentPage } = useGlobalContext();
-
-  const { data, isLoading } = useFetch("discover/movie", currentPage, "");
-  if (isLoading) {
+function Search() {
+  const { searchLoading, queryData } = useGlobalContext();
+  console.log(queryData);
+  if (searchLoading) {
     return <Loader />;
   } else {
     return (
       <Box>
-        <Pagination totalPages={data.total_pages} />
         <Grid
           templateColumns={{ base: "repeat(2,1fr)", md: "repeat(5, 1fr)" }}
           gap={7}
         >
-          {data.results.map((movie) => {
+          {queryData.map((data) => {
             return (
-              <GridItem key={movie.id}>
+              <GridItem key={data.id}>
                 <Box position="relative">
-                  <Link href={`/movie/${movie.id}`}>
+                  <Link
+                    href={`/${data.first_air_date ? "tv" : "movie"}/${data.id}`}
+                  >
                     <Image
-                      src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                      src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
                       fallback={<LoadingImage />}
                     />
 
@@ -61,14 +58,18 @@ function Movies() {
                   </Link>
                 </Box>
                 <Box p="2">
-                  <Link fontWeight="bold" href={`/movie/${movie.id}`}>
-                    {movie.title}
+                  <Link
+                    fontWeight="bold"
+                    href={`/${data.media_type}/${data.id}`}
+                  >
+                    {data.title || data.name}
                   </Link>
 
                   <Text color="gray.500">
-                    {moment(movie.release_date, "YYYY-MM-DD").format(
-                      "MMMM Do YYYY"
-                    )}
+                    {moment(
+                      data.release_date || data.first_air_date,
+                      "YYYY-MM-DD"
+                    ).format("MMMM Do YYYY")}
                   </Text>
                 </Box>
               </GridItem>
@@ -80,4 +81,4 @@ function Movies() {
   }
 }
 
-export default Movies;
+export default Search;
