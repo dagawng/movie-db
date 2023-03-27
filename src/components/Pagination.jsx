@@ -22,7 +22,6 @@ function Pagination({ totalPages }) {
       return (
         <Button
           borderRadius="50%"
-          mx="0.1rem"
           padding="1"
           _hover={{ bg: "gray.400" }}
           key={page}
