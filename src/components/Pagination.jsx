@@ -23,6 +23,7 @@ function Pagination({ totalPages }) {
         <Button
           borderRadius="50%"
           padding="1"
+          size="sm"
           _hover={{ bg: "gray.400" }}
           key={page}
           bg={page === currentPage ? "gray.400" : ""}
@@ -39,7 +40,7 @@ function Pagination({ totalPages }) {
   let pageIncrementEllipse = null;
   if (pages.length > maxPageLimit) {
     pageIncrementEllipse = (
-      <Button onClick={nextPage} bg="white" _hover={{ bg: "white" }}>
+      <Button size="sm" onClick={nextPage} bg="white" _hover={{ bg: "white" }}>
         &hellip;
       </Button>
     );
@@ -47,7 +48,12 @@ function Pagination({ totalPages }) {
   let pageDecrementEllipse = null;
   if (minPageLimit >= 1) {
     pageDecrementEllipse = (
-      <Button onClick={previousPage} _hover={{ bg: "white" }} bg="white">
+      <Button
+        size="sm"
+        onClick={previousPage}
+        _hover={{ bg: "white" }}
+        bg="white"
+      >
         &hellip;
       </Button>
     );
@@ -57,6 +63,7 @@ function Pagination({ totalPages }) {
     <Flex justify="center" my="1.75rem">
       {currentPage > pages[0] && (
         <IconButton
+          size="sm"
           borderRadius="50%"
           icon={<ArrowBackIcon />}
           onClick={previousPage}
@@ -67,6 +74,7 @@ function Pagination({ totalPages }) {
       {pageNumbers}
       {pageIncrementEllipse}
       <IconButton
+        size="sm"
         borderRadius="50%"
         icon={<ArrowForwardIcon />}
         onClick={nextPage}
