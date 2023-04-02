@@ -19,6 +19,7 @@ function SideBar({ isOpen, onClose }) {
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px">
             <Link
+              href="/"
               fontSize="2rem"
               fontFamily="monospace"
               bgGradient="linear(to-l, #7928CA, #FF0080)"
@@ -29,7 +30,7 @@ function SideBar({ isOpen, onClose }) {
           </DrawerHeader>
           <DrawerBody>
             <Stack>
-              <Button as="a" leftIcon={<Icon as={MdHome} />} isActive href="/">
+              <Button as="a" leftIcon={<Icon as={MdHome} />} href="/">
                 Home
               </Button>
               <Button
