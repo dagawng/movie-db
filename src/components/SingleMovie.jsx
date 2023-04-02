@@ -5,7 +5,6 @@ import {
   CardBody,
   Heading,
   Text,
-  Button,
   Box,
   Badge,
 } from "@chakra-ui/react";
@@ -20,7 +19,6 @@ function SingleMovie() {
   const { pathname } = useLocation();
 
   const { data, isLoading } = useFetch(pathname, currentPage);
-  const navigate = useNavigate();
 
   return (
     <>
