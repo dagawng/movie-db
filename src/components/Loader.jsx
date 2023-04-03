@@ -1,7 +1,7 @@
 import { Spinner, Center, Text, Stack } from "@chakra-ui/react";
 function Loader() {
   return (
-    <Center h="100vh">
+    <Center h="60vh">
       <Stack>
         <Spinner
           size="xl"
