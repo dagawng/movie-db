@@ -14,7 +14,7 @@ import LoadingImage from "./LoadingImage";
 import useFetch from "../useFetch";
 
 const TVShowCard = () => {
-  const { data, isLoading } = useFetch("tv/popular");
+  const { data, isLoading } = useFetch("tv/popular", 1);
 
   return (
     <Grid

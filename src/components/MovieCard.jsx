@@ -14,7 +14,7 @@ import useFetch from "../useFetch";
 import LoadingImage from "./LoadingImage";
 
 const MovieCard = () => {
-  const { data, isLoading } = useFetch("movie/popular");
+  const { data, isLoading } = useFetch("movie/popular", 1);
 
   return (
     <Grid
