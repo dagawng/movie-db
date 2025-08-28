@@ -8,38 +8,38 @@ import {
   Box,
   Badge,
 } from "@chakra-ui/react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { ArrowBackIcon } from "@chakra-ui/icons";
+import { useLocation } from "react-router-dom";
 import useFetch from "../useFetch";
 import LoadingSingleMovie from "./LoadingSingleMovie";
 import Casts from "./Casts";
-import { useGlobalContext } from "../context";
-function SingleMovie() {
-  const { currentPage } = useGlobalContext();
-  const { pathname } = useLocation();
 
-  const { data, isLoading } = useFetch(pathname, currentPage);
+function SingleMovie() {
+  const { pathname } = useLocation();
+  // Remove the leading slash from the path to prevent double slashes in the API URL
+  const apiPath = pathname.substring(1);
+
+  const { data, isLoading } = useFetch(apiPath);
 
   return (
     <>
       {isLoading ? (
         <LoadingSingleMovie />
-      ) : (
+      ) : data && data.id ? (
         <Card
           shadow="base"
-          direction={{ base: "column", md: "row", sm: "column" }}
+          direction={{ base: "column", md: "row" }}
           overflow="hidden"
           variant="outline"
         >
           <Image
             maxW={{ base: "100%", sm: "100%", md: "25%" }}
             src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
-            alt={data.title}
+            alt={data.title || data.name}
           />
 
           <Stack>
             <CardBody>
-              <Heading size="lg">{data.title}</Heading>
+              <Heading size="lg">{data.title || data.name}</Heading>
 
               <Text mt="5" fontFamily="mono" fontSize="xl" color="purple">
                 Overview
@@ -73,25 +73,30 @@ function SingleMovie() {
                 </Text>
               </Box>
               <Box>
-                <Text>
-                  <Text as="span" fontWeight="bold">
-                    Duration:
-                  </Text>{" "}
-                  <Badge p="0.5" colorScheme="red">
-                    {`${Math.floor(data.runtime / 60)} hours and ${
-                      data.runtime % 60
-                    }`}{" "}
-                    minutes
-                  </Badge>
-                </Text>
+                {data.runtime > 0 && (
+                  <Text>
+                    <Text as="span" fontWeight="bold">
+                      Duration:
+                    </Text>{" "}
+                    <Badge p="0.5" colorScheme="red">
+                      {`${Math.floor(data.runtime / 60)}h ${
+                        data.runtime % 60
+                      }m`}
+                    </Badge>
+                  </Text>
+                )}
                 <Text>
                   <Text as="span" fontWeight="bold">
                     country:
                   </Text>{" "}
                   {data.production_countries.map((country, index) => {
                     return (
-                      <Badge mr="1" colorScheme="orange" key={index}>
-                        {country.name}{" "}
+                      <Badge
+                        mr="1"
+                        colorScheme="orange"
+                        key={country.iso_3166_1 || index}
+                      >
+                        {country.name}
                       </Badge>
                     );
                   })}
@@ -100,10 +105,13 @@ function SingleMovie() {
                   <Text as="span" fontWeight="bold">
                     Production:
                   </Text>{" "}
-                  {data.production_companies.map((company) => {
+                  {data.production_companies.map((company, index) => {
                     return (
                       <Badge mr="1" colorScheme="blue" key={company.id}>
-                        {company.name},{" "}
+                        {company.name}
+                        {index === data.production_companies.length - 1
+                          ? ""
+                          : ", "}
                       </Badge>
                     );
                   })}
@@ -112,13 +120,13 @@ function SingleMovie() {
             </CardBody>
           </Stack>
         </Card>
-      )}
+      ) : null}
       <Box>
         <Text fontSize="1.7rem" m="1rem" ml="5">
           Casts
         </Text>
 
-        <Casts id={pathname} />
+        <Casts id={apiPath} />
       </Box>
     </>
   );

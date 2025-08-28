@@ -29,7 +29,7 @@ function TVShows() {
         templateColumns={{ base: "repeat(2,1fr)", md: "repeat(5, 1fr)" }}
         gap={7}
       >
-        {data.results.map((tv) => {
+        {data?.map((tv) => {
           return (
             <GridItem key={tv.id}>
               <Box position="relative">

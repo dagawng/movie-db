@@ -31,7 +31,7 @@ function Movies() {
           templateColumns={{ base: "repeat(2,1fr)", md: "repeat(5, 1fr)" }}
           gap={7}
         >
-          {data.results.map((movie) => {
+          {data?.map((movie) => {
             return (
               <GridItem key={movie.id}>
                 <Box position="relative">

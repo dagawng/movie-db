@@ -15,6 +15,7 @@ import LoadingImage from "./LoadingImage";
 
 const MovieCard = () => {
   const { data, isLoading } = useFetch("movie/popular", 1);
+  console.log(data);
 
   return (
     <Grid
@@ -23,7 +24,7 @@ const MovieCard = () => {
     >
       {isLoading
         ? "loading"
-        : data.results.map((movie) => {
+        : data?.map((movie) => {
             return (
               <GridItem key={movie.id}>
                 <Box position="relative">

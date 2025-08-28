@@ -23,7 +23,7 @@ const TVShowCard = () => {
     >
       {isLoading
         ? "loading"
-        : data.results.map((tv) => {
+        : data?.map((tv) => {
             return (
               <GridItem key={tv.id}>
                 <Box position="relative">

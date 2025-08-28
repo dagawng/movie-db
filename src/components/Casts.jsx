@@ -1,10 +1,8 @@
 import useFetch from "../useFetch";
 import { Box, Grid, Image, Text, GridItem, Link } from "@chakra-ui/react";
 import thumbnail from "../assets/pp.webp";
-import { useGlobalContext } from "../context";
 function Casts({ id }) {
-  const { currentPage } = useGlobalContext();
-  const { data, isLoading } = useFetch(`${id}/credits`, currentPage);
+  const { data, isLoading } = useFetch(id ? `${id}/credits` : null);
 
   return (
     <Box>
@@ -14,7 +12,7 @@ function Casts({ id }) {
       >
         {isLoading
           ? "Loading..."
-          : data.cast.map((cast, index) => {
+          : data?.cast?.map((cast) => {
               return (
                 <GridItem key={cast.id}>
                   <Image

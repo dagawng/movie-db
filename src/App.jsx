@@ -6,6 +6,7 @@ import SingleMovie from "./components/SingleMovie";
 import Movies from "./pages/Movies";
 import TVShows from "./pages/TVShows";
 import Search from "./components/Search";
+
 function App() {
   return (
     <>

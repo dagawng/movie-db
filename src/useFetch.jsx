@@ -1,35 +1,49 @@
 import { useState, useEffect } from "react";
-import { api_endpoint_for_tmdb, api_endpoint_key } from "./context";
 import axios from "axios";
+import { api_endpoint_for_tmdb, api_endpoint_key } from "./context";
 
-const useFetch = (urlParams, currentPage) => {
+const useFetch = (endpoint, page) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState({ show: false, msg: "" });
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
 
-  const fetchTrendingMovies = async (url) => {
+  const fetchData = async (url) => {
+    setIsLoading(true);
     try {
-      const response = await axios(url);
+      const response = await axios.get(url);
+      const responseData = response.data;
 
-      if (response.status === 200) {
-        const { data } = response;
-
-        setData(data);
-
-        setIsLoading(false);
+      if (responseData.results) {
+        setData(responseData.results);
       } else {
-        setError({ msg: "request failed" });
+        setData(responseData);
       }
+      setError({ show: false, msg: "" });
     } catch (error) {
-      console.log(error);
+      console.error("API Fetch Error:", error);
+      setError({ show: true, msg: error.message || "Request failed." });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchTrendingMovies(
-      `${api_endpoint_for_tmdb}${urlParams}${api_endpoint_key}&page=${currentPage}`
-    );
-  }, [currentPage]);
+    if (!endpoint) {
+      setIsLoading(false);
+      return;
+    }
+
+    // Construct the base URL with the API key
+    let url = `${api_endpoint_for_tmdb}${endpoint}${api_endpoint_key}`;
+
+    // Only add the page parameter if it's provided and is a positive number
+    if (page > 0) {
+      url += `&page=${page}`;
+    }
+
+    fetchData(url);
+  }, [endpoint, page]);
+
   return { isLoading, data, error };
 };
 
